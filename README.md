@@ -1,3 +1,3 @@
 # Paper-reading
 RANSAC
-Fuandametal matrix estimation-RANSAC
+Fuandametal matrix estimation
