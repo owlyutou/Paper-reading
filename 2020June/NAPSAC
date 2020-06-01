@@ -1,0 +1,20 @@
+NAPSAC BMVC2002
+
+研究问题：
+传统的鲁棒估计算法RANSAC、MINPRAN、LMS对数据全局采样，这种采样的效率随着维数的增加而呈指数下降（u^n）。
+文献利用多维空间内的数据（inliers）分布，修改RANSAC采样，提出NAPSAC (N Adjacent Points Sample Consensus)。
+
+研究方法：
+通过计算内点和外点的边际密度，发现inlier（比outlier）密度离manifold更近；而且inlier的边际密度mi(r)趋向于一个独立于σ的常数。
+修改RANSAC的均匀采样方式：选择一个初始的点x0；以x0为中心、r为半径寻找超球体（hypersphere）内的点集Sx0，从Sx0里均匀采样模型拟合需要的最小集。
+
+创新点：
+利用inlier的空间相关性，改进RANSAC的改进方式。
+当需要较大的inlier样本和高噪声中需要较小的样本时，基于邻近度选择点会增加对inlier进行采样的可能性。
+
+缺点不足：
+因为NAPSAC是基于局部采样，所以这种方法会导致inlier的不精确、得到退化解（F的估计）,当点稀疏分布且空间上不连贯时，NAPSAC通常无法找到所需的模型。（改进的方法之一，P-NAPSAC）
+
+思考：
+文献的inlier的选择方式是基于超球体（hypersphere）的，有没有其它选择inlier的方法？
+文献的方式是利用数据的分布对最小集的选择进行改进，能否利用数据分布对假设的选择也进行改进？
