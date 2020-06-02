@@ -1,0 +1,13 @@
+PROSAC CVPR2005
+
+研究问题：
+RANSAC的样本是随机抽取的，PROSAC对抽取过程进行改进。
+
+研究方法：
+对采集到的样本按质量（质量函数q）降序排序，这样没被污染的样本就更早被采样到。
+
+优点：
+PROSAC速度快。（在non-trivial problems上比RANSAC快了百倍）
+
+启发：
+PROSAC可以和RANSAC的其它改进方法（不是在采样过程的改进方法）结合（GCRANSAC也使用PROSAC）。
