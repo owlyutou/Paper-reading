@@ -1,0 +1,17 @@
+ECCV2008, RANSAC综述, Adaptive Real-Time RandomSample Consensus，ARRSAC
+
+研究问题：
+基于RANSAC技巧的对比提出了一种实时自适应的随机样本共识（Adaptive Real-Time RandomSample Consensus，ARRSAC）
+
+研究方法：
+对比总结了RANSAC的技巧的优缺点：（1）优化模型验证的Td,d Test、Bail-out Test、WaldSAC；（2）改进假设产生的PROSAC、MLESAC、Lo-RANSAC；（3）Preemptive RANSAC。
+Preemptive RANSAC可以满足real-time的需求，但是这种方法存在缺点：非自适应性，即应对不同数据污染程度（inlier ratio）的变化。
+ARRSAC框架通过以部分深度优先（partially depth-first）的方式进行操作，使得算法具有实时性和自适应性。
+初始候选集的假设被一次生成，并在第一个数据块上进行评估。根据深度优先的preemptive策略将错误的假设丢弃。
+通过此验证程序的假设可估计inlier ratio，该比率可用于确定所需的假设数量，并将上限固定为M。
+
+创新点：
+部分深度优先（partially depth-first）。
+
+思考：
+ARRSAC适合在对实时性有要求、inlier ratios变化大的应用中使用。
