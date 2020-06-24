@@ -1,0 +1,15 @@
+研究问题：
+对RANSAC的改进，提出了一种新的方法，σ-consensus。
+
+研究方法：
+RANSAC的内点噪声尺度σ决定了inlier-outlier的阈值，σ需要用户提供。
+为了解决这个问题，文献提出了σ-consensus。通过marginalized over σ，得到给定模型θ、点p为内点的得到似然概率：L(p|θ)【文献的公式（6）】，然后将这个作为（用最小二乘）估计模型的权重。
+此外文献还通过marginalize得到新的质量函数（quality function）【文献的公式（5）】和终止条件（termination criterion）【文献的公式（8）】。
+文献中σ-consensus主要有两方面的应用：（1）新的算法：MAGSAC；（2）将其作为其它鲁棒估计器的一种后处理方法。
+
+优点创新点：
+优点：不用用户定义σ，提升了鲁棒估计的精度；σ-consensus可以提高其它鲁棒估计器估计模型的质量（并且没有明显降低速度）；对噪声不敏感，对outliers更鲁棒。
+创新点：σ-consensus（marginalized over σ 的方法）；新的quality function和termination criterion。
+
+思考：
+自己改进的RANSAC方法可以加上σ-consensus做一个后处理polish提出的算法模型。
