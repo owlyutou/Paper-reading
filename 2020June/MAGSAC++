@@ -1,0 +1,17 @@
+研究问题：
+因为MAGSAC的σ-consensus多次进行LS（least-squares）拟合，所以这个算法会很慢，文献对MAGSAC做了改进。（即使采用本文中提出的加速方法，此步骤也很耗时）
+
+研究方法：
+文献的工作主要分为两个部分：①对MAGSAC的改进，即MAGSAC++；②新的采样方法Progressive NAPSAC。
+MAGSAC++分为两个部分：对 σ-consensus 做改进 -> σ-consensus++；对Model quality function (scoring)做了改进。
+(1)原来使用LS拟合，MAGSAC++使用迭代重加权最小二乘（IRLS）：让𝜏(𝜎)=𝑘𝜎 服从𝜒分布，得到其权重函数𝑤(𝑟)，这样就存在M-estimator的 𝜌 函数，该函数使用𝑤(𝑟)的IRLS最小化。
+(2) 定义模型质量函数𝑄(𝜃,𝒫)=1/(𝐿(𝜃,𝒫))，其中是权重函数𝑤(𝑟)定义的M-estimator的loss函数；MAGSAC++算法将其作为质量函数，使用σ-consensus++估计模型参数。
+Progressive NAPSAC使用PROSAC选取最初的点；然后通过growth function决定邻域在选定点附近增长的速度，负责在局部和全局间找到平衡。此外P-NAPSAC还改进了RANSAC的终止条件。
+因为这两部分的工作是不相关（orthogonal）的，所以文献将这两种改进的方法融合在一起。（σ-consensus++和P-NAPSAC也可以用于其它RANSAC改进方法）
+
+优点创新点：
+优点：（1）比MAGSAC更快、更准确，失败率小。（2）P-NAPSAC比PROSAC快。
+创新点：σ-consensus++、quality function的改进；P-NAPSAC改进终止条件&&growth function。
+
+思考：
+σ-consensus++和Progressive NAPSAC都可以用于RANSAC的改进，分别用于模型后处理，和样本的采样的改进。
