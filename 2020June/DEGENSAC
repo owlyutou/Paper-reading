@@ -1,0 +1,12 @@
+研究问题：
+这篇文献研究的是 在可能存在主平面（dominant scene plane）情况下（H-degenerate）的两视图几何估计问题。
+
+研究方法：
+文献先分析了H简并配置（H-degeneration Configurations）的三种情况，
+得到定理：如果七个对应关系（correspondences）中有五个及以上与单应相关（related by a homography），
+那么始终存在与 七个对应关系和与单应相关的所有对应关系 都一致的对极几何，包括不在七元组中的对应关系（即未用于EG估计中的对应关系）。
+这个定理解释了在主平面存在的情况下，RANSAC常常无法估计对极几何形状。
+DEGENSAC和RANSAC不同在：对样本进行评估，如果出现H-degenerate的情况，计算单应的support，使用plane-and-parallax算法计算基础矩阵及其support。如果这个support更大则存储这个support。
+
+创新点：
+提出在H-degenerate情况下估计对极几何的方法（plane-and-parallax算法）。
