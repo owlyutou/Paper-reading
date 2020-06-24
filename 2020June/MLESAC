@@ -1,0 +1,17 @@
+研究问题：
+这篇文献是对RANSAC的改进：①改进了RANSAC的cost function；②用最大似然公式表示多视图的关系relation（F、H、Q），用高斯分布和均匀分布的混合模型表示MLE误差。
+
+研究方法：
+这篇文献之前的工作是用两点之间的欧氏距离表示误差；
+这篇文献给出了有噪声干扰数据的概率密度函数，通过一个-log转换得到MLE误差项，这个误差建模为高斯分布和均匀分布的混合模型，目标函数是-log函数（-L）的最小化。
+RANSAC算法的cost函数定义为：误差小于阈值cost为0，大于阈值cost是一个常数；如果阈值T设置过高，所有的匹配点都被判断为inliers，这种鲁棒估计效果不好。
+提出的改进cost函数是：当误差e2小于T2的时候，cost = e2，当误差e2大于T2的时候，cost =T2。
+与RANSAC一样，MLESAC的输出对relation的初始估计，不同的是MLESAC还有每个correspondences与该relation一致的概率（likelihood）。
+
+创新点：
+最主要的创新点是用最大似然公式表示多视图的关系，用高斯和均匀分布的混合模型表示MLE误差。
+
+思考：
+对误差项的改进是比较常见的改进方法；
+这篇论文假设outliers是均匀分布的，所以误差多了一个均匀分布项。
+利用inliers和outliers的空间特性进行改进的方法主要是利用了inliers和outliers在空间上分布差异：inliers附近更可能是inlier，但是outliers没有这种特性，因为它是均匀分布的。
