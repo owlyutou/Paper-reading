@@ -1,0 +1,17 @@
+研究问题：
+标准的RANSAC是先给定inliers的error-threshold，然后在这个阈值内寻找使inlier rate最大的模型。
+这篇文献换了一种方法找模型：先估计inlier rate，然后在这个inlier rate上寻找使误差最小的模型。
+
+研究方法：
+Inlier rate的估计：通过IRE（Inlier Rate Estimation）算法求得内点率的估计 p ̂ 。
+（变换 t_min (p) 是在p％的matches中获得最小错误的那一个；估计的 p 离真正的内点率 p^* 越近，和 t_min (p) 相似的变换就越少。
+-> 构造标量 v_ε (p) ，v_ε (p)是可解释p％匹配项变换的数量。 p ̂ 为v_ε (p)中最小值的相对位置。）
+寻找最优变换：变换（transformation）子集：S_ε={t_1,…,t_n }，以BnB（branch-and-bound）方式对promising regions进行优化。
+输入估计的内点率p ̂、匹配集M、resolution ε 通过BnB迭代可以找到估计的最优变换。
+
+优点创新点：
+优点：准确性和SOTA相当。
+创新点：估计内点率的IRE算法，找最佳模型的BnB算法（非本文献首创）。
+
+思考：
+这篇文献提出的Inverting RANSAC在性能上并没有很大的提升，但是在RANSAC估计过程上有所创新。
