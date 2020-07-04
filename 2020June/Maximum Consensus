@@ -1,0 +1,15 @@
+研究问题：
+LO-RANSAC不能保证局部收敛，其假设验证方法具有不确定性，不适用于对可重复性要求高的任务；
+全局优化的方法计算开销大，适用于低维模型。  ->  文献引入一种新的局部收敛算法以实现最大共识（Maximum Consensus）。
+
+研究方法：
+基于线性互补约束问题定义一个等效于原始问题的penalty problem，然后开发一种Frank-Wolfe算法，确定性地解决最大共识问题。
+原来的maximum consensus是寻找最大数量inliers的模型（公式1），通过引入indicator variable u，slack variables s，
+将约束纳入cost函数作为penalty term等可以转化为penalty problem（公式10），常量α是penalty parameter。
+重写公式10，可以得到下面公式，其中Q(z)是complementarity residual。
+ 基于此可以开发解决最大公式问题的算法（算法2，EP；算法1，Frank-Wolfe method）。通过公式10 的special property实现有效的最小化。
+
+优缺点创新点：
+优点：①提出的方法是确定性且收敛的；②在outlier rates较高的情况速度快，结果好；③提出的方法适用于几何残差问题。
+缺点：速度慢。
+创新点：将问题转化为Penalty Problem。
