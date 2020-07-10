@@ -1,0 +1,18 @@
+研究问题：
+通过引入线性矩阵不等式（Linear Matrix Inequality, LMI）约束来减少解空间，加速 Consensus Maximization 的优化。
+
+研究方法：
+实对称矩阵的n维仿射线性空间参数化：A(y)= A_0+∑_i^n▒〖y_i A_i 〗 ，LMI是指对y∈R^n的约束：A(y)≽0 。
+LMI约束的 quadratic programming 如下形式（公式（2）），等价于下面的SDP (Semi-definite Program)（公式（3））：
+LMI约束下的 Consensus Maximization 可以表示成下面的公式（公式（4））：
+公式（4）的最优化可以通过MI-SDP（Mixed Integer SDP）求得，即下面的最优问题：
+Consensus Maximization with LMI约束问题的general global optimization framework如下：
+
+优点创新点：
+优点：①速度快，适用于外点率高（90%+）的情况；
+创新点：①提出通用LMI约束；②在BnB paradigm中使用LMI约束，解决consensus maximization问题。
+
+思考：
+这篇文献属于全局优化方法（比较不好理解），对于RANSAC（鲁棒方法）的改进似乎没有很大帮助。
+
+**注** Consensus Maximization：在给定问题中最大化inliers的数量。
