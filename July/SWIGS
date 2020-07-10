@@ -1,0 +1,21 @@
+研究问题：
+利用新的置信度度量MR-Rayleigh，提出一种新的 Guided Sampling 方法，SWIGS。
+
+研究方法：
+MR（Meta-Recognition）：s_(i,j)=‖q_i-r_j ‖ 是匹配分数（距离），MR首先选择经过升序排序的k个（最低）匹配分数 s_(1,k) ；
+然后将k-1个匹配分数（除了第一个）拟合 Weibull 分布，测试s_1，如果W(s_1;λ,η)>δ，则是外点。
+其中 W(s_1;λ,η)=e^(〖-(s/λ)〗^η ) ，是CCDF (Complementary Cumulative Distribution)。当图像存在repetitive textures的时候，这种方法准确率会下降。
+MR-Rayleigh：将分布改为Rayleigh分布可以提升MR的准确性和鲁棒性，Rayleigh’s CCDF：
+ 其中 σ 来自 s_(2,k) ，σ ̂=√(1/(2(k-1)) ∑_(j=2)^k▒s_j^2 ) ；同（2）相比，（4）只有一个参数 σ ，降低对参数的敏感性。
+使用 MR-Rayleigh 指导采样：指导采样的主要思想是计算correspondences是正确match的置信度，
+置信度的计算有不同的方法（公式（6）后验概率，公式（7）相似分数），文献使用的置信度是上面提到的MR-Rayleigh，即c_l=R(s_1^((l) ),σ ̂) 。
+这样SWIGS避免了密度估计和offline计算阶段，且只需要计算一个参数。
+
+优点创新点：
+优点：①需要的迭代次数少（快速且准确）；②只需调整（tune）一个参数；
+创新点：①使用Rayleigh分布，MR-Rayleigh；②利用MR-Rayleigh指导采样，提出SWIGS；
+
+思考：
+文献工作的主要创新点是将Weibull分布改成Rayleigh分布
+【其原因是当正确的匹配分数出现在s_(2,k)（特别是图像存在repetitive textures）的时候，MR-Weibull的tail-fitting 过程会受到影响，从而影响预测】，但是为什么瑞利分布就能解决这个问题呢？
+如果瑞利分布可以提升算法的性能，那用其它的分布是否也能达到同样（甚至更好）的效果？
